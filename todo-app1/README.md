@@ -1,3 +1,10 @@
+#deploy command 
+cd [home-directory]/todo-app1
+npm install
+cd functions 
+npm install
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
