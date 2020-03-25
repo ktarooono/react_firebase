@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import firebase from './firebase'
+import Login from './Login'
+import Home from './Home'
 import './App.css'
 
 class App extends Component {
@@ -12,30 +14,13 @@ class App extends Component {
       this.setState({ user })
     })
   }
-
-  login() {
-    const provider = new firebase.auth.GoogleAuthProvider()
-    firebase.auth().signInWithRedirect(provider)
-  }
-
-  logout() {
-    firebase.auth().signOut()
-  }
-
   render() {
     return (
       <div className="App">
-      <p className="App-intro">
-      {this.state.user? "UID:":""} {this.state.user && this.state.user.uid}
-         </p>
-       {this.state.user ? (
-         <button onClick={this.logout}>Google Logout</button>
-       ) : (
-         <button onClick={this.login}>Google Login</button>
-       )}
+    {this.state.user ? <Home/>
+        :<Login/>}
       </div>
     )
   }
 }
-
 export default App
