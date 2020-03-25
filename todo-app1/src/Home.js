@@ -20,11 +20,16 @@ logout() {
 render() {
   return (
     <div className="App">
-    <div className="App-intro" style={{textAligin:"right",display:"block"}}>
-      <button onClick={this.logout} style={{color:"red",float:"right"}} >Google Logout</button>
-    </div>
     <div className="Home" style={{display:"block",clear:"both"}}>
-      It's Home Space
+        <h1 style={{textAlign:"left"}}>It's React & Firebase Application!!</h1>
+        <div className="Sentence">
+        I'll create a app from following idea.<br/>
+         ・TODO App<br/>
+         ・SNS　App<br/>
+         ・EC site<br/>
+         ・Matching App<br/>
+         ・Memo App<br/>
+        </div>
     </div>
     </div>
   )

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import firebase from './firebase'
 
 import googleLoginIcon from './Images/google/google_signin_buttons/web/2x/btn_google_signin_dark_focus_web@2x.png'
-class Login extends Component {
+class LoginOutButton extends Component {
   state = {
     user: null
   }
@@ -24,14 +24,13 @@ logout() {
 
 render() {
   return (
-    <div className="login">
-    <p className="App-intro">
-    {this.state.user? "UID:":""} {this.state.user && this.state.user.uid}
-       </p>
-     <img src={googleLoginIcon} alt="GoogleloginIcon" style={{width:"200px"}}
-     onClick={this.login} />
-    </div>
+    <div className="LoginOutButton">
+    {this.state.user?
+      <button onClick={this.logout} style={{color:"red",float:"right"}} >Logout</button>
+      :<button onClick={this.login} style={{color:"red",float:"right"}} >Login</button>
+    }
+     </div>
   )
 }
 }
-export default Login;
+export default LoginOutButton;
