@@ -20,7 +20,7 @@ logout() {
 render() {
   return (
     <div className="App">
-    <div className="Home" style={{display:"block",clear:"both"}}>
+    <div className="Home" id="message" style={{display:"block",clear:"both"}}>
         <h1 style={{textAlign:"left"}}>It's React & Firebase Application!!</h1>
         <div className="Sentence">
         I'll create a app from following idea.<br/>

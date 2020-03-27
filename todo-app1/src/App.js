@@ -17,7 +17,7 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App">
+      <div className="App" >
         <Header/>
     {this.state.user ? <Home/>
         :<LoginPage/>}

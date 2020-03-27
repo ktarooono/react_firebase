@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
 import firebase from './firebase'
+import {Button} from '@material-ui/core'
 
 import googleLoginIcon from './Images/google/google_signin_buttons/web/2x/btn_google_signin_dark_focus_web@2x.png'
 class LoginOutButton extends Component {
   state = {
-    user: null
+    user: null,
+    style:""
+  }
+
+  constructor(props){
+    super(props);
+
   }
 
 componentDidMount() {
@@ -23,11 +30,12 @@ logout() {
 }
 
 render() {
+  console.log("this")
   return (
-    <div className="LoginOutButton">
+    <div className="LoginOutButton" style={this.props.style}>
     {this.state.user?
-      <button onClick={this.logout} style={{color:"red",float:"right"}} >Logout</button>
-      :<button onClick={this.login} style={{color:"red",float:"right"}} >Login</button>
+      <Button variant="contained" color="primary" onClick={this.logout} style={{cursol:"pointer"}} >Logout</Button>
+      :<Button variant="contained" color="primary" onClick={this.login} style={{cursol:"pointer"}} >Login</Button>
     }
      </div>
   )
