@@ -3,9 +3,17 @@ import firebase from './firebase'
 import LoginPage from './LoginPage'
 import Home from './Home'
 import Header from './Header'
+import createBrowserHistory from 'history/createBrowserHistory';
+import createStore from './modules/Store/Store';
+import {Provider} from 'react-redux';
+import { ConnectedRouter} from 'connected-react-router'
+import { Route, Redirect, Switch } from 'react-router-dom'
 import './App.css'
 
-class App extends Component {
+const history = createBrowserHistory();
+const store = createStore(history);
+
+export default class App extends Component {
   state = {
     user: null
   }
@@ -19,10 +27,45 @@ class App extends Component {
     return (
       <div className="App" >
         <Header/>
-    {this.state.user ? <Home/>
-        :<LoginPage/>}
+
+        <Provider store={store}>
+            <ConnectedRouter history={history}>
+              {this.state.user?
+                  <AppRoute/>
+                  :<LoginRoute/>}
+            </ConnectedRouter>
+        </Provider>
+
       </div>
     )
   }
 }
-export default App
+// <Router>
+// <Route component={AppRoute} />
+// </Router>
+
+// <ConnectedRouter history={history}>
+//   <AppRoute/>
+// </ConnectedRouter>
+
+//
+const AppRoute = (props) => (
+<React.Fragment>
+  <Switch>
+    <Route path="/Home" component={Home}/>
+    <Route path="/"  render={({ match }) => (
+      <Redirect to={`/Home`} />
+    )}/>
+  </Switch>
+</React.Fragment>
+)
+const LoginRoute = (props) => (
+<React.Fragment>
+  <Switch>
+    <Route path="/LoginPage" component={LoginPage}/>
+    <Route path="/"  render={({ match }) => (
+      <Redirect to={`/LoginPage`} />
+    )}/>
+  </Switch>
+</React.Fragment>
+)

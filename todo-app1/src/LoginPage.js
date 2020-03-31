@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import firebase from './firebase'
+import {withRouter} from 'react-router-dom';
 
 import googleLoginIcon from './Images/google/google_signin_buttons/web/2x/btn_google_signin_dark_focus_web@2x.png'
 class LoginPage extends Component {
@@ -11,6 +12,10 @@ componentDidMount() {
   firebase.auth().onAuthStateChanged(user => {
     this.setState({ user })
   })
+}
+
+contructor(props){
+  this.super(props);
 }
 
 login() {
@@ -34,4 +39,4 @@ render() {
   )
 }
 }
-export default LoginPage;
+export default withRouter(LoginPage);
