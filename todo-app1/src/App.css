@@ -9,6 +9,11 @@
     border-radius: 3px;
 }
 
+.site-logo{
+  width: 250px;
+  margin:0 30px 30px 0px ;
+}
+
 .line-delimiter {
     content: '';
     display: block;
@@ -65,6 +70,16 @@
 .Header{
   background-color: rgba(175, 212, 112);
   height:50px;
+}
+.Header-Right-Component{
+  float:right;
+  display:inline-block;
+  height:100%;
+}
+.Header-Left-Component{
+    float:left;
+    display:inline-block;
+    height:100%;
 }
 .btn{
     display:inline-block;

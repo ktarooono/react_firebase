@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import firebase from './firebase'
 import {withRouter} from 'react-router-dom';
-
-import googleLoginIcon from './Images/google/google_icons/google_icon.png'
+import {myPortalIconSrc} from './ImageUtil'
+import {myPortalIconShickSrc} from './ImageUtil'
+import {googleLoginIconSrc} from './ImageUtil'
 class LoginPage extends Component {
   state = {
     user: null
@@ -30,6 +31,9 @@ logout() {
 render() {
   return (
     <div className="login conteiner">
+    <div>
+    <img className="site-logo"src={myPortalIconSrc} alt="myPortalIcon"/>
+    </div>
     <a href="#" className="btn login original" onClick={this.login} >
       <div className="btnContainer login">
          <span>ログイン</span>
@@ -43,7 +47,7 @@ render() {
     <a href="#" className="btn login google" onClick={this.login} >
       <div className="btnContainer login">
          <img className="sns-icon"
-         src={googleLoginIcon} alt="GoogleIcon"/>
+         src={googleLoginIconSrc} alt="GoogleIcon"/>
          <span>Google ログイン</span>
       </div>
     </a>

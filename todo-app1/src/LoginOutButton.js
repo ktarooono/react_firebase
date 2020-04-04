@@ -35,12 +35,12 @@ toLogoutPage(){
 }
 
 render() {
-  console.log("this")
+  const btnStyles= {cursol:"pointer",height:"100%"};
   return (
     <div className="LoginOutButton" style={this.props.style}>
     {this.state.user?
-      <Button variant="contained" color="primary" onClick={this.logout} style={{cursol:"pointer"}} >Logout</Button>
-      :<Button variant="contained" color="primary" onClick={this.toLogoutPage} style={{cursol:"pointer"}} >Login</Button>
+      <Button variant="contained" color="primary" onClick={this.logout} style={btnStyles} >Logout</Button>
+      :<Button variant="contained" color="primary" onClick={this.toLogoutPage} style={btnStyles} >Login</Button>
     }
      </div>
   )
