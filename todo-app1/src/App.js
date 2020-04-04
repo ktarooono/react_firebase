@@ -8,10 +8,12 @@ import createStore from './modules/Store/Store';
 import {Provider} from 'react-redux';
 import { ConnectedRouter} from 'connected-react-router'
 import { Route, Redirect, Switch } from 'react-router-dom'
+
 import './App.css'
 
 const history = createBrowserHistory();
 const store = createStore(history);
+
 
 export default class App extends Component {
   state = {
@@ -23,11 +25,10 @@ export default class App extends Component {
       this.setState({ user })
     })
   }
-  render() {
+  render(){
     return (
-      <div className="App" >
+      <div className="App">
         <Header/>
-
         <Provider store={store}>
             <ConnectedRouter history={history}>
               {this.state.user?

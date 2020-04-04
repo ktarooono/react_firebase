@@ -4,6 +4,8 @@ import {withRouter} from 'react-router-dom';
 import {myPortalIconSrc} from './ImageUtil'
 import {myPortalIconShickSrc} from './ImageUtil'
 import {googleLoginIconSrc} from './ImageUtil'
+import {tanboSrc} from './ImageUtil'
+
 class LoginPage extends Component {
   state = {
     user: null
@@ -30,42 +32,44 @@ logout() {
 
 render() {
   return (
-    <div className="login conteiner">
-    <div>
-    <img className="site-logo"src={myPortalIconSrc} alt="myPortalIcon"/>
-    </div>
-    <a href="#" className="btn login original" onClick={this.login} >
-      <div className="btnContainer login">
-         <span>ログイン</span>
+    <div className="login-page"  style={ {backgroundImage:`url(${tanboSrc()})`}}>
+      <div className="login conteiner">
+      <div>
+      <img className="site-logo"src={myPortalIconSrc()} alt="myPortalIcon"/>
       </div>
-    </a>
-    <div className="login invisible">――――or―――――</div>
-    <p className="App-intro">
-    {this.state.user? "UID:":""} {this.state.user && this.state.user.uid}
-       </p>
+      <a href="#" className="btn login original" onClick={this.login} >
+        <div className="btnContainer login">
+           <span>ログイン</span>
+        </div>
+      </a>
+      <div className="login invisible">――――or―――――</div>
+      <p className="App-intro">
+      {this.state.user? "UID:":""} {this.state.user && this.state.user.uid}
+         </p>
 
-    <a href="#" className="btn login google" onClick={this.login} >
-      <div className="btnContainer login">
-         <img className="sns-icon"
-         src={googleLoginIconSrc} alt="GoogleIcon"/>
-         <span>Google ログイン</span>
-      </div>
-    </a>
-    <br/>
-    <a href="#" className="btn login faceBook">
-      <div className="btnContainer login">
-         <span class="fab fa-facebook-square sns-icon"></span>
-         <span>FaceBook ログイン</span>
-      </div>
-    </a>
-    <br/>
-    <a href="#" className="btn login twitter">
-      <div className="btnContainer login">
-      <span class="fab fa-twitter-square sns-icon"></span>
-         <span>Twitter ログイン</span>
-      </div>
-    </a>
+      <a href="#" className="btn login google" onClick={this.login} >
+        <div className="btnContainer login">
+           <img className="sns-icon"
+           src={googleLoginIconSrc()} alt="GoogleIcon"/>
+           <span>Google ログイン</span>
+        </div>
+      </a>
+      <br/>
+      <a href="#" className="btn login faceBook">
+        <div className="btnContainer login">
+           <span class="fab fa-facebook-square sns-icon"></span>
+           <span>FaceBook ログイン</span>
+        </div>
+      </a>
+      <br/>
+      <a href="#" className="btn login twitter">
+        <div className="btnContainer login">
+        <span class="fab fa-twitter-square sns-icon"></span>
+           <span>Twitter ログイン</span>
+        </div>
+      </a>
 
+      </div>
     </div>
   )
 }

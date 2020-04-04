@@ -3,6 +3,8 @@ import firebase from './firebase'
 import LoginOutButton from './LoginOutButton'
 import myPortalIcon from './Images/system/my-portal_logo.png'
 import myPortalIconShick from './Images/system/my-portal_logo_shick.png'
+import tanbo from './Images/system/田んぼ.jpeg'
+
 import googleLoginIcon from './Images/google/google_icons/google_icon.png'
 
 import './App.css'
@@ -18,4 +20,8 @@ export function myPortalIconShickSrc(props){
 }
 export function googleLoginIconSrc(props){
   return googleLoginIcon;
+}
+
+export function tanboSrc(props){
+  return tanbo;
 }

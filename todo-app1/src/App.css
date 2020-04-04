@@ -1,16 +1,22 @@
 .App {
   text-align: center;
+  padding-bottom: 50px;
 }
 .conteiner{
   background: #fff;
-    max-width: 360px;
-    margin: 100px auto 16px;
+    max-width: 600px;
+    margin: 100px auto auto;
     padding: 32px 24px;
     border-radius: 3px;
 }
 
+.login-page{
+  display:flex;
+  background: rgba(45,45,45, 0.5);
+  min-height: 800px;
+}
 .site-logo{
-  width: 250px;
+  width: 400px;
   margin:0 30px 30px 0px ;
 }
 
@@ -69,7 +75,7 @@
 }
 .Header{
   background-color: rgba(175, 212, 112);
-  height:50px;
+  height:80px;
 }
 .Header-Right-Component{
   float:right;
@@ -88,8 +94,12 @@
     margin:5px 0px;
     text-align: left;
 }
+.btn.login{
+  width:300px;
+  height:40px;
+}
 .btnContainer.login{
-    margin: 3px 15px;
+    margin: 7px 20px;
 }
 .sns-icon{
   width:20px;
@@ -102,10 +112,7 @@
   color:white;
   text-align: center;
 }
-.btn.login{
-  width:200px;
-  height:30px;
-}
+
 .login.invisible{
   opacity: 0.6;
 }
