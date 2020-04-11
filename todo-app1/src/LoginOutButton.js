@@ -35,7 +35,7 @@ toLogoutPage(){
 }
 
 render() {
-  const btnStyles= {cursol:"pointer",height:"100%"};
+  const btnStyles= {cursol:"pointer",height:"100%",backgroundColor:"transparent",borderRadius:"0px"};
   return (
     <div className="LoginOutButton" style={this.props.style}>
     {this.state.user?

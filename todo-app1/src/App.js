@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import firebase from './firebase'
 import LoginPage from './LoginPage'
+import OriginalLoginPage from './OriginalLoginPage'
 import Home from './Home'
 import Header from './Header'
 import createBrowserHistory from 'history/createBrowserHistory';
@@ -64,6 +65,7 @@ const LoginRoute = (props) => (
 <React.Fragment>
   <Switch>
     <Route path="/LoginPage" component={LoginPage}/>
+    <Route path="/OriginalLoginPage" component={OriginalLoginPage}/>
     <Route path="/"  render={({ match }) => (
       <Redirect to={`/LoginPage`} />
     )}/>

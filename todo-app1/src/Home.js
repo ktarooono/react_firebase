@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import firebase from './firebase'
 import {tanboSrc} from './ImageUtil'
-
+import {Tabs,Tab} from '@material-ui/core';
 class Home extends Component {
   state = {
     user: null
@@ -20,8 +20,8 @@ logout() {
 
 render() {
   return (
-    <div className="App" >
-    <div className="Home conteiner"  style={{display:"block",clear:"both"}}>
+    <div className="Home" >
+    <div className=""  style={{display:"inline-block"}}>
         <h1 style={{textAlign:"left"}}>It's React & Firebase Application!!</h1>
         <div className="Sentence">
         I'll create a app from following idea.<br/>

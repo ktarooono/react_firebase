@@ -20,8 +20,10 @@ componentDidMount() {
 contructor(props){
   this.super(props);
 }
-
-login() {
+originalLogin(){
+  document.location.href='./OriginalLoginPage'
+}
+googleLogin() {
   const provider = new firebase.auth.GoogleAuthProvider()
   firebase.auth().signInWithRedirect(provider)
 }
@@ -35,9 +37,9 @@ render() {
     <div className="login-page"  style={ {backgroundImage:`url(${tanboSrc()})`}}>
       <div className="login conteiner">
       <div>
-      <img className="site-logo"src={myPortalIconSrc()} alt="myPortalIcon"/>
+      <img className="LoginPage site-logo"src={myPortalIconSrc()} alt="myPortalIcon"/>
       </div>
-      <a href="#" className="btn login original" onClick={this.login} >
+      <a href="#" className="btn login original" onClick={this.originalLogin} >
         <div className="btnContainer login">
            <span>ログイン</span>
         </div>
