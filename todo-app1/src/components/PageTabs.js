@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import firebase from './firebase'
+import firebase from '../utils/firebase'
 import {Tabs,Tab} from '@material-ui/core'
 
 class PageTabs extends Component {

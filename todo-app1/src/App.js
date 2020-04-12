@@ -1,22 +1,36 @@
 import React, { Component } from 'react'
-import firebase from './firebase'
-import LoginPage from './LoginPage'
-import OriginalLoginPage from './OriginalLoginPage'
-import Home from './Home'
-import Header from './Header'
-import createBrowserHistory from 'history/createBrowserHistory';
-import createStore from './modules/Store/Store';
-import {Provider} from 'react-redux';
+import firebase from './utils/firebase'
+import LoginPage from './pages/LoginPage'
+import OriginalLoginPage from './pages/OriginalLoginPage'
+import Home from './pages/Home'
+import Header from './components/Header'
+import createBrowserHistory from 'history/createBrowserHistory'
+// import createStore from './modules/Store/Store';
+import {createStore} from 'redux'
+import {Provider} from 'react-redux'
 import { ConnectedRouter} from 'connected-react-router'
-import { Route, Redirect, Switch } from 'react-router-dom'
+import { BrowserRouter,Route, Redirect, Switch } from 'react-router-dom'
 
 import './App.css'
 
-const history = createBrowserHistory();
-const store = createStore(history);
+// const history = createBrowserHistory();
 
+function appReducer(state,action){
+  switch (action.type) {
+   case 'ADDTAX':
+     return (
+       Object.assign({}, state, {price: action.price * 1.08})
+     );
+   default:
+     return state
+ }
+}
 
-export default class App extends Component {
+const reduxState = {user:'',price:100};
+// const store = createStore(history);
+const store = createStore(appReducer,reduxState);
+
+ class App extends Component {
   state = {
     user: null
   }
@@ -29,13 +43,15 @@ export default class App extends Component {
   render(){
     return (
       <div className="App">
+      <Provider store={store}>
         <Header/>
-        <Provider store={store}>
-            <ConnectedRouter history={history}>
+            {/*<ConnectedRouter history={history}>*/}
+            <BrowserRouter>
               {this.state.user?
                   <AppRoute/>
                   :<LoginRoute/>}
-            </ConnectedRouter>
+            {/*</ConnectedRouter>*/}
+            </BrowserRouter>
         </Provider>
 
       </div>
@@ -72,3 +88,4 @@ const LoginRoute = (props) => (
   </Switch>
 </React.Fragment>
 )
+export default App;
