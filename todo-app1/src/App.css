@@ -28,8 +28,14 @@
 
   border-radius:40px;
 }
-.Header-tabs{
+.Header .tabs{
   display:inline-block !important;
+}
+.Header .tab:hover{
+  background-color: rgb(162, 206, 87); 
+}
+.Header .tab.plus{
+  min-width: 20px !important;
 }
 
 .line-delimiter {
