@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import Header from './components/Header'
 import createBrowserHistory from 'history/createBrowserHistory'
 // import createStore from './modules/Store/Store';
+import {appReducer} from './utils/reduxUtils'
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 import { ConnectedRouter} from 'connected-react-router'
@@ -15,18 +16,7 @@ import './App.css'
 
 // const history = createBrowserHistory();
 
-function appReducer(state,action){
-  switch (action.type) {
-   case 'ADDTAX':
-     return (
-       Object.assign({}, state, {price: action.price * 1.08})
-     );
-   default:
-     return state
- }
-}
-
-const reduxState = {user:'',price:100};
+const reduxState = {user:'',price:100,myPages:[{label:"new"}]};
 // const store = createStore(history);
 const store = createStore(appReducer,reduxState);
 

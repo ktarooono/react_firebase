@@ -3,7 +3,7 @@ import firebase from '../utils/firebase'
 import {Tabs,Tab} from '@material-ui/core'
 import PageTabs from '../components/PageTabs'
 import {connect} from 'react-redux'
-import {actionType,addTax} from '../utils/ActionCreator'
+import {addTaxAction,addMyPagesAction} from '../utils/reduxUtils'
 
 class Home extends Component {
   state = {
@@ -25,11 +25,13 @@ class Home extends Component {
   logout() {
     firebase.auth().signOut()
   }
-
+  onClickAddMyPage(e){
+    this.props.addMyPage("");
+  }
   render() {
     return (
       <div className="Home" >
-      <div className=""  style={{display:"inline-block"}}>
+      <div className=""  style={{display:"inline-block"}} onClick={this.onClickAddMyPage.bind(this)} >
           <h1 style={{textAlign:"left"}}>It's React & Firebase Application!!</h1>
           <div className="Sentence">
           I'll create a app from following idea.<br/>
@@ -49,14 +51,17 @@ class Home extends Component {
 function mapStateToProps(state) {
     return {
       price: state.price,
-      pages: state.pages
+      myPages: state.myPages
     };
   }
 
 function mapDispatchToProps(dispatch) {
     return {
-      onClick(price){
-        dispatch(addTax(price));
+      addTax(price){
+        dispatch(addTaxAction(price));
+      },
+      addMyPage(myPage){
+        dispatch(addMyPagesAction(myPage));
       }
     };
   }

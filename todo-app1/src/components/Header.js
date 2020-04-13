@@ -5,7 +5,7 @@ import PageTabs from './PageTabs'
 import {Tabs,Tab} from '@material-ui/core'
 import {myPortalIconSrc} from '../utils/ImageUtil'
 import '../App.css'
-import {actionType,addTax} from '../utils/ActionCreator'
+import {actionType,addTax} from '../utils/reduxUtils'
 
 class Header extends Component {
   state= {
