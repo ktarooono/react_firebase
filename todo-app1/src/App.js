@@ -6,7 +6,7 @@ import Home from './pages/Home'
 import Header from './components/Header'
 import createBrowserHistory from 'history/createBrowserHistory'
 // import createStore from './modules/Store/Store';
-import {appReducer} from './utils/reduxUtils'
+import {appReducer,initialReduxState} from './utils/reduxUtils'
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 import { ConnectedRouter} from 'connected-react-router'
@@ -15,10 +15,8 @@ import { BrowserRouter,Route, Redirect, Switch } from 'react-router-dom'
 import './App.css'
 
 // const history = createBrowserHistory();
-
-const reduxState = {user:'',price:100,myPages:[{label:"new"}]};
 // const store = createStore(history);
-const store = createStore(appReducer,reduxState);
+const store = createStore(appReducer,initialReduxState);
 
  class App extends Component {
   state = {

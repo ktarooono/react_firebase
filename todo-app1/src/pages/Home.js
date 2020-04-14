@@ -31,7 +31,7 @@ class Home extends Component {
   render() {
     return (
       <div className="Home" >
-      <div className=""  style={{display:"inline-block"}} onClick={this.onClickAddMyPage.bind(this)} >
+      <div className=""  style={{display:"inline-block"}}  >
           <h1 style={{textAlign:"left"}}>It's React & Firebase Application!!</h1>
           <div className="Sentence">
           I'll create a app from following idea.<br/>

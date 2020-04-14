@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import firebase from '../utils/firebase'
 import {Tabs,Tab} from '@material-ui/core'
-import {addTaxAction,addMyPagesAction} from '../utils/reduxUtils'
+import {addTaxAction,addMyPagesAction,selectMyPageAction} from '../utils/reduxUtils'
 import {connect} from 'react-redux'
 
 
@@ -10,7 +10,8 @@ class PageTabs extends Component {
   constructor(props){
     super(props);
     this.state= {
-      user: null
+      user: null,
+      disableTabIndex:-1
     }
   }
 
@@ -24,17 +25,28 @@ class PageTabs extends Component {
     this.props.addMyPage({label:"new1"});
     this.setState({pages:""});
   }
-  test(e){
-    this.setState({pages:""});
+  onClickSelectPage(page,e){
+    this.props.selectMyPage(page);
+  }
+  changeDisableTabIndex(index,e){
+    this.setState(
+      {disableTabIndex:index}
+    )
   }
 
   render() {
+    var tabIndex = 0;
     const tabList = this.props.myPages.map((page) => {
-      return <Tab className="tab" label={page.label} onClick={this.test.bind(this)}/>
+      return <div><Tab className={ this.state.disableTabIndex == this.props.selectedMyPage.index ? "tab selected":"tab" }
+       contentEditable={ this.state.disableTabIndex == this.props.selectedMyPage.index ? true:false } label={page.label}
+       onClick={this.onClickSelectPage.bind(this,{index:tabIndex,page:page})}
+      ondblclick={this.changeDisableTabIndex.bind(this,tabIndex++)} />
+        <i class="far fa-arrow-alt-circle-up"></i>
+        </div>
     });
-    // onChange={() => {}}
+
     return (
-          <Tabs className="tabs"value={0} aria-label="simple tabs example">
+          <Tabs className="tabs" value={this.props.selectedMyPage.index} aria-label="simple tabs example">
             {tabList}
             <Tab className="tab plus" label={'+'}  onClick={this.onClickAddMyPage.bind(this)} />
           </Tabs>
@@ -43,10 +55,12 @@ class PageTabs extends Component {
 }
 
 function mapStateToProps(state) {
-    return {
-      price: state.price,
-      myPages: state.myPages
-    };
+    return state;
+    //  {
+    //   price: state.price,
+    //   myPages: state.myPages,
+    //   selectMyPage:state.selectMyPage
+    // };
   }
 
 function mapDispatchToProps(dispatch) {
@@ -56,6 +70,9 @@ function mapDispatchToProps(dispatch) {
       },
       addMyPage(myPage){
         dispatch(addMyPagesAction(myPage));
+      },
+      selectMyPage(selectMyPage){
+        dispatch(selectMyPageAction(selectMyPage));
       }
     };
   }

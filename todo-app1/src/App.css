@@ -32,10 +32,14 @@
   display:inline-block !important;
 }
 .Header .tab:hover{
-  background-color: rgb(162, 206, 87); 
+  background-color: rgb(162, 206, 87);
 }
 .Header .tab.plus{
   min-width: 20px !important;
+}
+.tab.selected .MuiTab-wrapper{
+  background-color: white;
+  min-height:24px;
 }
 
 .line-delimiter {

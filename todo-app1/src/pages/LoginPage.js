@@ -47,7 +47,7 @@ render() {
       {this.state.user? "UID:":""} {this.state.user && this.state.user.uid}
          </p>
 
-      <a href="#" className="btn login google" onClick={this.login} >
+      <a href="#" className="btn login google" onClick={this.googleLogin} >
         <div className="btnContainer login">
            <img className="sns-icon"
            src={googleLoginIconSrc()} alt="GoogleIcon"/>
