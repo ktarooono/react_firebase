@@ -1,6 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component} from 'react'
+// import {Tabs,Tab} from '@material-ui/core'
+import classNames from 'classnames'
 import firebase from '../utils/firebase'
-import {Tabs,Tab} from '@material-ui/core'
+import {Button} from '@material-ui/core'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import {addTaxAction,addMyPagesAction,selectMyPageAction} from '../utils/reduxUtils'
 import {connect} from 'react-redux'
 
@@ -36,20 +39,18 @@ class PageTabs extends Component {
 
   render() {
     var tabIndex = 0;
-    const tabList = this.props.myPages.map((page) => {
-      return <div><Tab className={ this.state.disableTabIndex == this.props.selectedMyPage.index ? "tab selected":"tab" }
-       contentEditable={ this.state.disableTabIndex == this.props.selectedMyPage.index ? true:false } label={page.label}
-       onClick={this.onClickSelectPage.bind(this,{index:tabIndex,page:page})}
-      ondblclick={this.changeDisableTabIndex.bind(this,tabIndex++)} />
-        <i class="far fa-arrow-alt-circle-up"></i>
-        </div>
+    const tabListComponent = this.props.myPages.map((page) => {
+      return <Button className={classNames("tab ", this.props.selectedMyPage.index==tabIndex ? "selected":"")} color="primary"
+            onClick={this.onClickSelectPage.bind(this,{index:tabIndex++,page:page})}>
+        {page.label}
+        </Button>
     });
 
     return (
-          <Tabs className="tabs" value={this.props.selectedMyPage.index} aria-label="simple tabs example">
-            {tabList}
-            <Tab className="tab plus" label={'+'}  onClick={this.onClickAddMyPage.bind(this)} />
-          </Tabs>
+      <div className="tabs">
+              {tabListComponent}
+                <Button className="tab plus"   onClick={this.onClickAddMyPage.bind(this)} > + </Button>
+      </div>
     )
   }
 }

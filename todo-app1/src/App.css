@@ -29,13 +29,26 @@
   border-radius:40px;
 }
 .Header .tabs{
+  margin-left: 20px;
   display:inline-block !important;
+  vertical-align:bottom;
 }
 .Header .tab:hover{
   background-color: rgb(162, 206, 87);
 }
+.Header .tab{
+  min-width:100px;
+  min-height: 50px;
+  border-radius:15px 15px 0 0;
+  box-shadow: -1px -1px 0px 0px rgba(0,0,0,0.12);
+}
+.Header .tab.selected{
+  background-color: red;
+}
+
 .Header .tab.plus{
-  min-width: 20px !important;
+  min-width: 40px !important;
+  border-radius:5px 5px 0 0;
 }
 .tab.selected .MuiTab-wrapper{
   background-color: white;
@@ -113,6 +126,9 @@
     display:inline-block;
     height:100%;
     text-align:left;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }
 .btn{
     display:inline-block;
