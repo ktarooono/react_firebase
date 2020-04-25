@@ -3,7 +3,7 @@ export const initialReduxState = {
   user:'',
   price:100,
   myPages:[{label:"new"}],
-  selectedMyPage:{index:0,page:{}}
+  selectedMyPage:{index:0,page:{label:"test"}}
 };
 
 //ActionCreator
