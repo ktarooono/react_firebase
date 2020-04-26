@@ -31,35 +31,33 @@ class RightClickMenu extends Component {
   onClickSelectPage(page,e){
     this.props.selectMyPage(page);
   }
-  changeDisableTabIndex(index,e){
-    this.setState(
-      {disableTabIndex:index}
-    )
-  }
+
 
 
   render() {
-
+    const menuItemList = this.props.list.map((menu) => {
+      return  <MenuItem onClick={menu.func}>{menu.label}</MenuItem>
+    })
     return (
-      <div className="RightClickMenu" style={this.state.styles}>
-      <Paper>
-      <MenuList>
-        <MenuItem>Profile</MenuItem>
-        <MenuItem>My account</MenuItem>
-        <MenuItem>Logout</MenuItem>
+      <div className="RightClickMenu" style={this.props.styles}>
+      <div className="FadeLayer" onClick={this.props.closeFunction}/>
+        <Paper>
+        <MenuList>
+          {menuItemList}
         </MenuList>
-      </Paper>
+        </Paper>
       </div>
     )
   }
 }
-export function RightClickMenuFunctions(){
+export function RightClickMenuFunctions(e){
   var functionList =  {
     viewMenu: function (e) {
       var styles = {
-        top:"10px",
-        left:"10px",
+        top:e.pageY,
+        left:e.pageX,
         visibility:"visible"
+
       };
       return styles;
     },

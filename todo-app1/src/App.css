@@ -183,3 +183,14 @@
   background: #315096;
   color: #fff;
 }
+
+.RightClickMenu{
+  position:absolute;
+}
+.FadeLayer{
+  position:fixed;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+}

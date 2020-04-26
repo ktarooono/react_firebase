@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import firebase from '../utils/firebase'
 import LoginOutButton from './LoginOutButton'
 import PageTabs from './PageTabs'
-import RightClickMenu, {RightClickMenuFunctions} from './RightClickMenu'
 import {Tabs,Tab} from '@material-ui/core'
 import {myPortalIconSrc} from '../utils/ImageUtil'
 import '../App.css'
@@ -33,7 +32,6 @@ class Header extends Component {
           <img src={myPortalIconSrc()}
           onClick={this.toLogoutPage} className="Header site-logo"/>
           <PageTabs pages={this.state.pages}/>
-          <RightClickMenu styles={RightClickMenuFunctions().closeMenu()}/>
         </div>
 
         <div className="Header-Right-Component">
