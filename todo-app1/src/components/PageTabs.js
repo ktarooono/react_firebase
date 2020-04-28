@@ -26,7 +26,12 @@ class PageTabs extends Component {
       firebase.auth().onAuthStateChanged(user => {
         this.setState({ user })
       })
-
+  }
+  componentDidUpdate(){
+      var editableTab = document.getElementsByClassName("tab editable");
+      if(editableTab.length >0 ){
+        editableTab[0].focus();
+      }
   }
   onClickAddMyPage(e){
     this.props.addMyPage({label:"new1"});
@@ -35,10 +40,15 @@ class PageTabs extends Component {
   onClickSelectPage(page,e){
     this.props.selectMyPage(page);
   }
+
   changeDisableTabIndex(e){
     this.setState(
-      {disableTabIndex:this.state.RightClickIndex}
+      {
+        disableTabIndex:this.state.RightClickIndex,
+        RightClickMenuStyles:RightClickMenuFunctions().closeMenu()
+      }
     )
+
   }
   viewRightClickMenu(index,e){
     var styles= RightClickMenuFunctions().viewMenu(e);
@@ -46,7 +56,6 @@ class PageTabs extends Component {
       RightClickMenuStyles:styles,
       RightClickIndex:index
     });
-    e.stopPropagation();
     return false;
   }
   closeRightClickMenu(e){
@@ -55,14 +64,25 @@ class PageTabs extends Component {
       RightClickMenuStyles:styles
     })
   }
+  finishEditableTabMode(){
+    this.setState({
+      disableTabIndex:-1
+    })
+  }
 
   render() {
+
     var tabIndex = 0;
     const tabListComponent = this.props.myPages.map((page) => {
-      return <Button className={classNames("tab ", this.props.selectedMyPage.index==tabIndex ? "selected":"")}
-      color="primary"
+      return <Button className={classNames("tab "
+      , this.props.selectedMyPage.index==tabIndex ? "selected":""
+      , this.state.disableTabIndex == tabIndex ? "editable":""     )}
+            color="primary"
+            contentEditable={ this.state.disableTabIndex == tabIndex ? true:false }
             onClick={this.onClickSelectPage.bind(this,{index:tabIndex,page:page})}
-            onContextMenu={this.viewRightClickMenu.bind(this,tabIndex++)} >
+            onContextMenu={this.viewRightClickMenu.bind(this,tabIndex++)}
+            onBlur={this.finishEditableTabMode.bind(this)}
+            >
         {page.label}
         </Button>
     });
