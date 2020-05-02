@@ -41,6 +41,7 @@
   min-height: 50px;
   border-radius:15px 15px 0 0;
   box-shadow: -1px -1px 0px 0px rgba(0,0,0,0.12);
+  text-transform: none;
 }
 .Header .tab.selected{
   background-color: red;

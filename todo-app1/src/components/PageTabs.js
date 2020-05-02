@@ -48,8 +48,13 @@ class PageTabs extends Component {
         RightClickMenuStyles:RightClickMenuFunctions().closeMenu()
       }
     )
-
   }
+  resetDisableTabIndex(e){
+    this.setState({
+      disableTabIndex:-1
+    })
+  }
+
   viewRightClickMenu(index,e){
     var styles= RightClickMenuFunctions().viewMenu(e);
     this.setState({
@@ -64,10 +69,11 @@ class PageTabs extends Component {
       RightClickMenuStyles:styles
     })
   }
-  finishEditableTabMode(){
-    this.setState({
-      disableTabIndex:-1
-    })
+  keyDownInTab(e){
+    if(e.key === 'Enter') {
+      this.resetDisableTabIndex(e);
+      e.target.blur();
+    }
   }
 
   render() {
@@ -81,7 +87,8 @@ class PageTabs extends Component {
             contentEditable={ this.state.disableTabIndex == tabIndex ? true:false }
             onClick={this.onClickSelectPage.bind(this,{index:tabIndex,page:page})}
             onContextMenu={this.viewRightClickMenu.bind(this,tabIndex++)}
-            onBlur={this.finishEditableTabMode.bind(this)}
+            onKeyDown={this.keyDownInTab.bind(this)}
+            onBlur={this.resetDisableTabIndex.bind(this)}
             >
         {page.label}
         </Button>
