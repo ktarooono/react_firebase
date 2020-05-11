@@ -19,6 +19,13 @@ export function addMyPagesAction(myPage) {
     myPage
   };
 }
+export function initMyPagesAction(myPages) {
+  return {
+    type: actionType.MYPAGE.INIT,
+    myPages
+  };
+}
+
 export function selectMyPageAction(selectedMyPage) {
   return {
     type: actionType.MYPAGE.SELECT,
@@ -31,7 +38,8 @@ export const actionType ={
   MYPAGE:{ADD:"ADD_PAGE",
     DELETE:"DELETE_PAGE",
     UPDATE:"UPDATE_PAGE" ,
-    SELECT:"SELECT_PAGE"
+    SELECT:"SELECT_PAGE",
+    INIT:"INIT_PAGE"
   }
 }
 
@@ -42,6 +50,10 @@ export function appReducer(state,action){
      return (
        Object.assign({}, state, {price: action.price * 1.08})
      );
+  case actionType.MYPAGE.INIT:
+      return (
+        Object.assign({},state,{myPages: action.myPages})
+      )
    case actionType.MYPAGE.ADD:
       state.myPages.push(action.myPage);
       return(

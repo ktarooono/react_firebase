@@ -27,8 +27,12 @@ const store = createStore(appReducer,initialReduxState);
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ user })
     })
+    const store = firebase.firestore();
+    const collection = store.collection("pages")
+          console.log(collection.doc("userId"));
   }
   render(){
+    
     return (
       <div className="App">
       <Provider store={store}>

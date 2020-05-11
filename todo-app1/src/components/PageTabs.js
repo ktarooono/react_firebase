@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import firebase from '../utils/firebase'
 import {Button} from '@material-ui/core'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import {addTaxAction,addMyPagesAction,selectMyPageAction} from '../utils/reduxUtils'
+import {addTaxAction,addMyPagesAction,selectMyPageAction,initMyPagesAction} from '../utils/reduxUtils'
 import {connect} from 'react-redux'
 import RightClickMenu, {RightClickMenuFunctions} from './RightClickMenu'
 
@@ -22,10 +22,32 @@ class PageTabs extends Component {
 
   }
 
-  componentDidMount() {
+   componentDidMount() {
+     (async () => {
       firebase.auth().onAuthStateChanged(user => {
         this.setState({ user })
       })
+      try {
+        // 省略
+        // (Cloud Firestoreのインスタンスを初期化してdbにセット)
+        const db =firebase.firestore();
+        const userRef = await db.collection('pages').doc('ono_ke')
+        // userRef.set({
+        //   pages:[{label:"firestore_test"}]
+        // });
+
+        const userDoc = await userRef.get()
+        this.props.initMyPage(userDoc.data().pages);
+        // 出力例
+        // { birthday: Timestamp { seconds: 343062000, nanoseconds: 0 },
+        //   createdAt: Timestamp { seconds: 1571747519, nanoseconds: 521000000 },
+        //   name: { first: 'tarou', last: 'yamada' },
+        //   score: 80,
+        //   updatedAt: Timestamp { seconds: 1571747519, nanoseconds: 521000000 } }
+      } catch (err) {
+        console.log(`Error: ${JSON.stringify(err)}`)
+      }
+    })()
   }
   componentDidUpdate(){
       var editableTab = document.getElementsByClassName("tab editable");
@@ -79,7 +101,9 @@ class PageTabs extends Component {
   render() {
 
     var tabIndex = 0;
-    const tabListComponent = this.props.myPages.map((page) => {
+    var tabListComponent = "";
+    if(this.props.myPages){
+    tabListComponent = this.props.myPages.map((page) => {
       return <Button className={classNames("tab "
       , this.props.selectedMyPage.index==tabIndex ? "selected":""
       , this.state.disableTabIndex == tabIndex ? "editable":""     )}
@@ -93,6 +117,7 @@ class PageTabs extends Component {
         {page.label}
         </Button>
     });
+  }
 
     return (
         <div  className="tabs" >
@@ -119,6 +144,9 @@ function mapDispatchToProps(dispatch) {
     return {
       addTax(price){
         dispatch(addTaxAction(price));
+      },
+      initMyPage(myPages){
+        dispatch(initMyPagesAction(myPages));
       },
       addMyPage(myPage){
         dispatch(addMyPagesAction(myPage));
