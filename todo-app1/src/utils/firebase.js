@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 import 'firebase/auth'
 
-const config = {
+export const config = {
   apiKey: "AIzaSyACfUH75FbWcIXa8AX7ARwhUVVHIfRIDvA",
      authDomain: "mytodoapp-842c6.firebaseapp.com",
      databaseURL: "https://mytodoapp-842c6.firebaseio.com",

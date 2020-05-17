@@ -28,22 +28,13 @@ class PageTabs extends Component {
         this.setState({ user })
       })
       try {
-        // 省略
-        // (Cloud Firestoreのインスタンスを初期化してdbにセット)
         const db =firebase.firestore();
         const userRef = await db.collection('pages').doc('ono_ke')
         // userRef.set({
         //   pages:[{label:"firestore_test"}]
         // });
-
         const userDoc = await userRef.get()
         this.props.initMyPage(userDoc.data().pages);
-        // 出力例
-        // { birthday: Timestamp { seconds: 343062000, nanoseconds: 0 },
-        //   createdAt: Timestamp { seconds: 1571747519, nanoseconds: 521000000 },
-        //   name: { first: 'tarou', last: 'yamada' },
-        //   score: 80,
-        //   updatedAt: Timestamp { seconds: 1571747519, nanoseconds: 521000000 } }
       } catch (err) {
         console.log(`Error: ${JSON.stringify(err)}`)
       }

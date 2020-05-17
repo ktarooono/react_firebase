@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import firebase from './utils/firebase'
+import firebase ,{config} from './utils/firebase'
 import LoginPage from './pages/LoginPage'
 import OriginalLoginPage from './pages/OriginalLoginPage'
 import Home from './pages/Home'
@@ -7,16 +7,26 @@ import Header from './components/Header'
 import createBrowserHistory from 'history/createBrowserHistory'
 // import createStore from './modules/Store/Store';
 import {appReducer,initialReduxState} from './utils/reduxUtils'
-import {createStore} from 'redux'
+import {createStore, applyMiddleware, compose } from 'redux'
 import {Provider} from 'react-redux'
 import { ConnectedRouter} from 'connected-react-router'
 import { BrowserRouter,Route, Redirect, Switch } from 'react-router-dom'
+
+import thunk from 'redux-thunk'
+import { reduxFirestore, getFirestore } from 'redux-firestore'
+import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'
 
 import './App.css'
 
 // const history = createBrowserHistory();
 // const store = createStore(history);
-const store = createStore(appReducer,initialReduxState);
+const reduxStore = createStore(appReducer,initialReduxState,
+  compose(
+    applyMiddleware(thunk.withExtraArgument({getFirebase,getFirestore})),
+    reduxFirestore(firebase)  ,
+    reactReduxFirebase(firebase)
+  )
+);
 
  class App extends Component {
   state = {
@@ -27,15 +37,13 @@ const store = createStore(appReducer,initialReduxState);
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ user })
     })
-    const store = firebase.firestore();
-    const collection = store.collection("pages")
-          console.log(collection.doc("userId"));
+
   }
   render(){
-    
+
     return (
       <div className="App">
-      <Provider store={store}>
+      <Provider store={reduxStore}>
         <Header/>
             {/*<ConnectedRouter history={history}>*/}
             <BrowserRouter>

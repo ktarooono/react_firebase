@@ -14,10 +14,23 @@ export function addTaxAction(price) {
   };
 }
 export function addMyPagesAction(myPage) {
-  return {
-    type: actionType.MYPAGE.ADD,
-    myPage
-  };
+  return async (dispatch,getState,{getFirebase,getFirestore}) => {
+    const firestore = getFirestore();
+    const storeRef = await firestore.collection('pages').doc('ono_ke');
+    const data = await storeRef.get()
+    const pageList = await data.data().pages;
+    pageList.push(myPage);
+    storeRef.set({
+      pages:pageList
+    }).then(() => {
+        dispatch( {type: actionType.MYPAGE.ADD,
+          myPage
+        })
+    }).catch((err) => {
+      dispatch({type:'CREATE_PROJECT_ERROR',err})
+    })
+  }
+  return
 }
 export function initMyPagesAction(myPages) {
   return {
@@ -26,12 +39,27 @@ export function initMyPagesAction(myPages) {
   };
 }
 
+// export function selectMyPageAction(selectedMyPage) {
+//   return {
+//     type: actionType.MYPAGE.SELECT,
+//     selectedMyPage
+//   };
+// }
 export function selectMyPageAction(selectedMyPage) {
-  return {
-    type: actionType.MYPAGE.SELECT,
-    selectedMyPage
-  };
+  return (dispatch,getState,{getFirebase,getFirestore}) => {
+    const firestore = getFirestore();
+    firestore.collection('pages').doc('redux').set({
+      pages:selectedMyPage
+    }).then(() => {
+        dispatch({type: actionType.MYPAGE.SELECT,
+        selectedMyPage})
+    }).catch((err) => {
+      dispatch({type:'CREATE_PROJECT_ERROR',err})
+    })
+  }
 }
+
+
 //actionTypeEnum
 export const actionType ={
   TAX:{ADD:"ADD_TAX"},
